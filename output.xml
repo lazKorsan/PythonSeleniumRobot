@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.0 on win32)" generated="2026-02-02T22:41:08.024682" rpa="false" schemaversion="5">
+<suite id="s1" name="US004UseMethodForRegister" source="c:\Users\user\Desktop\python_planet2\robot_tests\test_cases\US004UseMethodForRegister.robot">
+<test id="s1-t1" name="New User Registration Test" line="6">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:08.180251" level="INFO">Opening browser 'chrome' to base url 'https://qa.loyalfriendcare.com/en'.</msg>
+<arg>https://qa.loyalfriendcare.com/en</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-02-02T22:41:08.180044" elapsed="3.330483"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-02-02T22:41:11.511578" elapsed="0.036672"/>
+</kw>
+<kw name="Loyal Friend Register Method" owner="LoyalFriendKeywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>(//*[@class="btn_add"])[2]</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-02T22:41:11.550075" elapsed="0.053322"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:11.604005" level="INFO">Clicking element '(//*[@class="btn_add"])[2]'.</msg>
+<arg>(//*[@class="btn_add"])[2]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-02T22:41:11.603678" elapsed="0.671739"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-02T22:41:14.276713" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-02T22:41:12.275643" elapsed="2.001221"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:14.277452" level="INFO">Typing text 'lazKorsan' into text field '//input[@id="name"]'.</msg>
+<arg>//input[@id="name"]</arg>
+<arg>${user_name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.277090" elapsed="0.083055"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-02-02T22:41:14.361296" level="INFO">${timestamp} = 1770061274</msg>
+<var>${timestamp}</var>
+<arg>int(time.time())</arg>
+<arg>modules=time</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.360404" elapsed="0.000988"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-02T22:41:14.362114" level="INFO">${dynamic_email} = lazKorsan1770061274@gmail.com</msg>
+<var>${dynamic_email}</var>
+<arg>${user_name}${timestamp}@gmail.com</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.361576" elapsed="0.000585"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:14.362567" level="INFO">Typing text 'lazKorsan1770061274@gmail.com' into text field '//input[@id="email"]'.</msg>
+<arg>//input[@id="email"]</arg>
+<arg>${dynamic_email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.362320" elapsed="0.113605"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nÜretilen Dinamik Email: ${dynamic_email}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.476136" elapsed="0.000626"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:14.477270" level="INFO">Typing text 'Query.2026' into text field '//input[@id="password"]'.</msg>
+<arg>//input[@id="password"]</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.476993" elapsed="0.152852"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:14.630318" level="INFO">Typing text 'Query.2026' into text field '//input[@id="password-confirm"]'.</msg>
+<arg>//input[@id="password-confirm"]</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.630056" elapsed="0.068034"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-02T22:41:15.699405" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-02T22:41:14.698310" elapsed="1.001307"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:15.700369" level="INFO">Clicking element '//button[@class="btn btn-primary btn-cons m-t-10"]'.</msg>
+<arg>//button[@class="btn btn-primary btn-cons m-t-10"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-02T22:41:15.699961" elapsed="0.559195"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-02T22:41:19.260270" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-02T22:41:16.259490" elapsed="3.001020"/>
+</kw>
+<kw name="Verify User Name And Print Poetry" owner="LoyalFriendKeywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>//a[@class='btn_add']</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.265493" elapsed="0.039886"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-02-02T22:41:19.338481" level="INFO">${raw_text} = lazKorsan</msg>
+<var>${raw_text}</var>
+<arg>//a[@class='btn_add']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.305838" elapsed="0.032708"/>
+</kw>
+<kw name="Strip String" owner="String">
+<msg time="2026-02-02T22:41:19.339034" level="INFO">${actual_name} = lazKorsan</msg>
+<var>${actual_name}</var>
+<arg>${raw_text}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.338757" elapsed="0.000314"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\n--- İKON AYIKLAMA VE TEST ŞİİRİ ---</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.339214" elapsed="0.000737"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Aranan kahraman: ${expected_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.340196" elapsed="0.001011"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Bulunan cengaver: ${actual_name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.341660" elapsed="0.001286"/>
+</kw>
+<if>
+<branch type="IF" condition="'${actual_name}' == '${expected_name}'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Ayarlar çarkı döndü, isim doğru takıldı, ✅</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.344251" elapsed="0.000716"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testin meşalesi, gururla yakıldı!</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.345232" elapsed="0.001648"/>
+</kw>
+<status status="PASS" start="2026-02-02T22:41:19.343464" elapsed="0.003601"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Eyvah! Çarklar karıştı, isimler uymadı, ❌</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-02T22:41:19.348214" elapsed="0.000140"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Sistem bu hatayı, asla duymadı...</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-02-02T22:41:19.348704" elapsed="0.000085"/>
+</kw>
+<kw name="Fail" owner="BuiltIn">
+<arg>Kullanıcı adı eşleşmedi! Beklenen: ${expected_name} Gelen: ${actual_name}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-02T22:41:19.349119" elapsed="0.000049"/>
+</kw>
+<status status="NOT RUN" start="2026-02-02T22:41:19.347598" elapsed="0.001649"/>
+</branch>
+<status status="PASS" start="2026-02-02T22:41:19.343350" elapsed="0.005974"/>
+</if>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${actual_name}</arg>
+<arg>${expected_name}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.349482" elapsed="0.000739"/>
+</kw>
+<arg>${user_name}</arg>
+<status status="PASS" start="2026-02-02T22:41:19.264514" elapsed="0.085855"/>
+</kw>
+<arg>lazKorsan</arg>
+<arg>Query.2026</arg>
+<status status="PASS" start="2026-02-02T22:41:11.549293" elapsed="7.801169"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-02-02T22:41:19.351103" elapsed="2.191591"/>
+</kw>
+<status status="PASS" start="2026-02-02T22:41:08.179150" elapsed="13.364207"/>
+</test>
+<status status="PASS" start="2026-02-02T22:41:08.025912" elapsed="13.518391"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="US004UseMethodForRegister" id="s1" pass="1" fail="0" skip="0">US004UseMethodForRegister</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
