@@ -3,4 +3,6 @@ Feature: Login Functionality
     Given the user is on the login page
     When the user enters "lazKorsan20220262058@gmail.com" and "Query.2026"
     Then the user name "lazKorsan" should be visible
-    
+
+    # feature dosyası behave ile çalıştırılırken terminalde
+    # behave tests/login.feature

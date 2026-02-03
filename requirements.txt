@@ -3,4 +3,4 @@ webdriver-manager>=4.0.0
 robotframework
 robotframework-seleniumlibrary
 behave
-assertpy
+assertpypython-dotenv
