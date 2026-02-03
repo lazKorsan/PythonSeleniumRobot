@@ -1,8 +1,6 @@
 import sys
 import os
 
-import InstuUtils
-
 print(f"DEBUG: sys.path BEFORE modification: {sys.path}")
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 print(f"DEBUG: Project root to be added: {project_root}")
@@ -19,6 +17,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import time
 
+import InstuUtils 
 from utils.config import LoginData
 
 driver = webdriver.Chrome()
