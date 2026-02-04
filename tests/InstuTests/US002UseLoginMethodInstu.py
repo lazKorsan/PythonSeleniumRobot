@@ -24,7 +24,9 @@ driver.maximize_window()
 driver.get("https://qa.instulearn.com/")
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
-InstuUtils.InstuLearnLoginMethod(driver, LoginData.EMAIL, LoginData.PASSWORD)
+
+
+InstuUtils.InstuLearnLoginMethod(driver,LoginData.EMAIL,LoginData.PASSWORD)
 
 
 time.sleep(15)  # Wait for a while to observe the result

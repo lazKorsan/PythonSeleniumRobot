@@ -6,12 +6,11 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import logging
 import time
+import InstuPages
 
 def InstuLearnLoginMethod(driver, email, password):
     # Giriş linkine tıkla
-    login_link_xpath = '//a[@href="/login" and contains(@class, "text-dark-blue")]'
-    driver.find_element(By.XPATH, login_link_xpath).click()
-    time.sleep(2)
+    
 
     # sayfanın yüklenmesini bekle
     time.sleep(2)
@@ -82,3 +81,40 @@ def InstuLearnRegisterMethod(driver, userName, password):
         return False
     
 # driver.quit() # Tarayıcıyı kapatmak istersen açabilirsin
+
+def navigateToNewCoursePage(driver):
+    """
+    Navigates from the main panel to the new course/webinar creation page.
+    """
+    print("Navigating to new course page...")
+    # 4. Page object oluştur
+    instu_pages = InstuPages.InstuPages(driver)
+    
+    # 5. Courses butonuna tıkla (METHOD'u çağır!)
+    instu_pages.click_coursesButton()
+    
+    # 6. Bekle ve kontrol et
+    time.sleep(2)
+    
+    # 7. Panel sayfasına gidildiğini doğrula ve ardından 'New Webinar' butonuna tıkla
+    panel_url = driver.current_url
+    print(f"Mevcut URL: {panel_url}")
+    
+    # URL'in 'panel' içerdiğini kontrol et
+    if "panel" in panel_url:
+        print("✅ BAŞARILI: Panel sayfasına gidildi!")
+
+        # 8. New Webinar butonuna tıkla (Page Object Model kullanarak)
+        instu_pages.click_new_webinar_button()
+        
+        # 9. Yeni sayfanın yüklenmesini bekle ve URL'i kontrol et
+        try:
+            WebDriverWait(driver, 10).until(EC.url_contains("webinars/new"))
+            new_page_url = driver.current_url
+            print(f"Yeni Sayfa URL: {new_page_url}")
+            print("✅ BAŞARILI: New Webinar sayfasına başarıyla gidildi!")
+        except:
+            print("❌ HATA: New Webinar sayfasına gidilemedi veya URL 'webinars/new' içermiyor.")
+
+    else:
+        print("❌ HATA: Panel sayfasına gidilemedi! (URL 'panel' içermiyor)")
