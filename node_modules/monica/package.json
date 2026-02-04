@@ -1,0 +1,14 @@
+{
+  "name": "monica",
+  "version": "1.0.1",
+  "description": "listen to Monica",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "author": "alsotang <alsotang@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^1.18.2"
+  }
+}
