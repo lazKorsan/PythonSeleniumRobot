@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 import logging
 import time
 import InstuPages
@@ -208,4 +209,131 @@ def step1(driver):
         print("Hata:", e)
     finally:
         time.sleep(5)
+        
+        
+
+
+def step2(driver, capacity="50", duration="45", tags="math", category_value="956"):
+    """
+    Webinar oluşturma sürecindeki Step 2 alanlarını doldurur ve Step 3'e geçişi doğrular.
+    """
+    print("--- Step 2 İşlemleri Başladı ---")
+    
+    # 1. Capacity Box
+    capacity_xpath = '//input[@name="capacity"]'
+    capacity_box = driver.find_element(By.XPATH, capacity_xpath)
+    driver.execute_script("arguments[0].style.border='3px solid green'", capacity_box)
+    capacity_box.clear()
+    capacity_box.send_keys(capacity)
+    print(f"Capacity: {capacity} olarak girildi.")
+
+    # 2. Duration Box (Özel JS korumalı yapı)
+    try:
+        duration_xpath = '//input[@name="duration"]'
+        duration_box = WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.XPATH, duration_xpath))
+        )
+        driver.execute_script("arguments[0].scrollIntoView(true);", duration_box)
+        driver.execute_script("arguments[0].style.border='3px solid red'", duration_box)
+        
+        # Standart giriş dene, olmazsa JS ile zorla
+        duration_box.clear()
+        duration_box.send_keys(duration)
+        
+        if not duration_box.get_attribute('value'):
+            driver.execute_script(f"arguments[0].value = '{duration}';", duration_box)
+            driver.execute_script("arguments[0].dispatchEvent(new Event('change', { bubbles: true }));", duration_box)
+        print(f"Duration: {duration} olarak girildi.")
+    except Exception as e:
+        print(f"Duration box doldurulurken hata: {e}")
+
+    # 3. Switch/Radio Butonları (Support, Certificate, Downloadable)
+    switches = driver.find_elements(By.XPATH, '//*[@class="custom-control custom-switch"]')
+    for i, switch in enumerate(switches[:3]): # İlk 3 switch'i tıkla
+        driver.execute_script("arguments[0].click();", switch)
+        print(f"Switch {i+1} aktif edildi.")
+
+    # 4. Tags Box
+    tags_xpath = '//input[@placeholder="Type tag name and press enter (Max : 5)"]'
+    tags_box = driver.find_element(By.XPATH, tags_xpath)
+    tags_box.send_keys(tags)
+    print(f"Etiket: {tags} eklendi.")
+
+    # 5. Category Dropdown
+    category_xpath = '//select[@id="categories"]'
+    category_element = driver.find_element(By.XPATH, category_xpath)
+    select = Select(category_element)
+    select.select_by_value(category_value)
+    print(f"Kategori ID {category_value} seçildi.")
+
+    # 6. Next Step ve Doğrulama
+    next_step_btn = driver.find_element(By.ID, "getNextStep")
+    next_step_btn.click()
+    print("Next Step butonuna tıklandı. URL doğrulanıyor...")
+
+    WebDriverWait(driver, 10).until(EC.url_contains("step/3"))
+    if "step/3" in driver.current_url:
+        print("------------------------------------------")
+        print("BAŞARILI: Step 2 tamamlandı, Step 3'e geçildi.")
+        print("------------------------------------------")
+        return True
+    else:
+        print("HATA: Step 3'e geçilemedi!")
+        return False
+    
+    
+    
+def step3(driver, access_days="10", price="0"):
+    """
+    Step 3: Pricing & Subscription ayarlarını yapar ve Step 4'e geçişi doğrular.
+    """
+    print("\n--- Step 3 (Pricing) İşlemleri Başladı ---")
+    
+    try:
+        # 1. Subscription Switch (Label üzerinden tıklama)
+        SUB_LABEL_XPATH = '//label[@for="subscribeSwitch"]'
+        sub_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, SUB_LABEL_XPATH))
+        )
+        # Elementi ortala ve border ekle
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", sub_button)
+        driver.execute_script("arguments[0].style.border='3px solid purple'", sub_button)
+        time.sleep(1)
+        
+        # JS Tıklaması (En güvenli yöntem)
+        driver.execute_script("arguments[0].click();", sub_button)
+        print("✅ Subscription butonu tıklandı.")
+        
+        # 2. Access Days (Erişim Gün Sayısı)
+        period_days_box = driver.find_element(By.NAME, "access_days")
+        driver.execute_script("arguments[0].style.border='3px solid green'", period_days_box)
+        period_days_box.clear()
+        period_days_box.send_keys(access_days)
+        print(f"✅ Erişim günü: {access_days}")
+        
+        # 3. Price (Fiyat)
+        price_box = driver.find_element(By.NAME, "price")
+        driver.execute_script("arguments[0].style.border='3px solid red'", price_box)
+        price_box.clear()
+        price_box.send_keys(price)
+        print(f"✅ Fiyat: {price}")
+        
+        # 4. Next Step Butonu
+        next_btn = driver.find_element(By.ID, "getNextStep")
+        driver.execute_script("arguments[0].style.border='3px solid yellow'", next_btn)
+        next_btn.click()
+        print("🚀 Next Step butonuna tıklandı.")
+        
+        # 5. Başarı Doğrulaması (URL Kontrolü)
+        WebDriverWait(driver, 15).until(EC.url_contains("step/4"))
+        if "step/4" in driver.current_url:
+            print("="*50)
+            print("⭐ STEP 3 BAŞARIYLA TAMAMLANDI, STEP 4'E GEÇİLDİ.")
+            print("="*50 + "\n")
+            return True
+        
+    except Exception as e:
+        print(f"❌ Step 3 sırasında hata oluştu: {str(e)}")
+        return False
+    
         
