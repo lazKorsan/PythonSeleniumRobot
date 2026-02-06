@@ -27,7 +27,7 @@ try:
     print("Login işlemi tamamlandı.")
     
     # buradaki adım step4nin başına dahil edilmeyecek. 
-    driver.get("https://qa.instulearn.com/panel/webinars/3638/step/4")
+    driver.get("https://qa.instulearn.com/panel/webinars/3637/step/4")
     
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.TAG_NAME, "body"))

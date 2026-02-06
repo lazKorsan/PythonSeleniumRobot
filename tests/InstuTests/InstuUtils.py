@@ -456,4 +456,85 @@ def step4(driver, title_text="Yeni Bölüm Başlığı"):
     except Exception as e:
         print(f"\n❌ MAALESEF BİR ENGELLE KARŞILAŞTIK: {e}")
         return False
+    
+def step5(driver, search_text="SDET"):
+    print("\n" + "🛡️" * 15)
+    print("STEP 5: PREREQUISITES GÖREVİ BAŞLADI")
+    print("🛡️" * 15)
+    
+    try:
+        # 1. New Prerequisite Butonuna Tıkla
+        new_pre_btn = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "webinarAddPrerequisites"))
+        )
+        new_pre_btn.click()
+        time.sleep(1)
+
+        # 2. Container'ı aç (Java'daki select2-container mantığı)
+        container = driver.find_element(By.CLASS_NAME, "select2-selection__placeholder")
+        driver.execute_script("arguments[0].style.border='3px solid red'", container)
+        container.click()
+        print("✅ Select2 container açıldı.")
+
+        # 3. Arama Kutusuna Yaz (Dinamik input)
+        # Select2 genellikle 'select2-search__field' class'ını kullanır
+        search_field = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, "select2-search__field"))
+        )
+        search_field.send_keys(search_text)
+        time.sleep(2) # Sonuçların listelenmesi için bekleme
+
+        # 4. Ofset Tıklama (30 Piksel Aşağı) - Java'daki Actions mantığı
+        print(f"🎯 '{search_text}' için 30 piksel altına tıklanıyor...")
+        actions = ActionChains(driver)
+        # Arama kutusunun tam ortasından 30 piksel aşağıya
+        actions.move_to_element(search_field).move_by_offset(0, 30).click().perform()
+        
+        # 5. Save İşlemi
+        save_btn = driver.find_element(By.CLASS_NAME, "js-save-prerequisite")
+        driver.execute_script("arguments[0].style.border='3px solid orange'", save_btn)
+        save_btn.click()
+        
+        time.sleep(3)
+        next_btn = driver.find_element(By.ID, "getNextStep")
+        driver.execute_script("arguments[0].style.border='3px solid green'", next_btn)
+        next_btn.click()
+
+        print("\n" + "🎊" * 20)
+        print("KAZANDIK! Step 5 Prerequisites başarıyla kaydedildi!")
+        print("🎊" * 20 + "\n")
+        return True
+
+    except Exception as e:
+        print(f"❌ Step 5'te bir engel çıktı: {e}")
+        return False
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
