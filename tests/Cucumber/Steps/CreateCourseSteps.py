@@ -4,11 +4,16 @@ import time
 import sys
 import os
 
-# Utils klasöründeki dosyaları görebilmek için yolu ekliyoruz
-sys.path.append(r'C:\Users\user\Desktop\python_planet2\tests\Cucumber\utils')
+# Mevcut dosyanın (CreateCourseSteps.py) dizinini al
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Proje kök dizinini (Cucumber) al
+project_root = os.path.dirname(current_dir)
+# 'utils' klasörünün yolunu oluştur
+utils_path = os.path.join(project_root, 'utils')
+sys.path.append(utils_path)
 
-import InstuUtils  # InstuUtils modülünü import et
-import testData     # testData modülünü import et
+import InstuUtils  
+import testData     
 
 @given('Kullanıcı tarayıcıyı açar')
 def step_impl(context):
@@ -69,7 +74,7 @@ def step_impl(context):
 def step_impl(context):
     row = context.table[0]
     # Yeni yazdığımız step7 metodunu çağırıyoruz
-    InstuUtils.step7_quiz_and_publish(
+    InstuUtils.step7(
         context.driver, 
         quiz_title=row['Sınav Başlığı'], # [cite: 24]
         exam_time=row['Sınav Süresi'],   # [cite: 25]
